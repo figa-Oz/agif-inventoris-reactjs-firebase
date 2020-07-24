@@ -1,5 +1,5 @@
 import React from 'react'
-import firebase from '../config/firebaseEnv'
+import firebase from '../config/firebase'
 
 class Login extends React.Component {
 constructor(){

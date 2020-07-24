@@ -4,11 +4,11 @@ import {
   Route
 } from "react-router-dom"
 import { Provider } from 'react-redux'
-import store from './config/store'
+import {store} from './config/redux'
 
-import Home from './contents/Home'
-import Login from './contents/Login'
-import Register from './contents/Register'
+import Home from './content/Home'
+import Login from './content/Login'
+import Register from './content/Register'
 
 class App extends Component {
   render() {
