@@ -6,7 +6,7 @@ import {
 import { Provider } from 'react-redux'
 import {store} from './config/redux'
 
-import Home from './content/Home'
+import Dashboard from './content/Dashboard'
 import Login from './content/Login'
 import Register from './content/Register'
 
@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Dashboard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
         </Router>
