@@ -1,50 +1,54 @@
 import React from 'react'
-import firebase from '../config/firebase'
+import Button from '../component/Button'
+import { registerUserApi } from '../config/redux/action'
+import { connect } from 'react-redux'
+
+const reduxState = (state) => ({
+  isLoading: state.isLoading
+})
+
+const reduxDispatch = (dispatch) => ({
+  registerApi: (data) => dispatch(registerUserApi(data))
+})
 
 class Register extends React.Component {
-constructor(){
-	super()
+constructor(props){
+	super(props)
 	this.state = {
-    	messages: [],
     	email:'',
-    	password:'' 
+    	password:'',
     }; 
 }
 
 handleChange = (e) => {
-  	console.log("e: ",e);
   	this.setState({
   		[e.target.id]: e.target.value
   	});
   }
 
-handleRegister = (event) => {
+handleRegister = async (event) => {
   	event.preventDefault();
   	
   	const { email, password } = this.state;
-  	console.log("data asli", email, password);
-  	
-  	firebase.auth().createUserWithEmailAndPassword(email, password)
-  	.then(res => {
-  		console.log("reponse: ", res)
-  	})
-  	.catch(function(error) {
-  		// Handle Errors here.
-  		var errorCode = error.code;
-  		var errorMessage = error.message;
-  		// ...
-	});
+
+    // Await (Wait proccess from Promise)
+    const res = await this.props.registerApi({email, password}).catch(err => err)
+
+    if (res) {
+      this.setState({email:'', password:''})
+    }
+
   }
 
   render() {
   	return(
-  		<form onSubmit={this.handleRegister}>
-      		<input type="text" name="email" id="email" placeholder="email" onChange={this.handleChange} />
-      		<input type="password" name="password" id="password" placholder="password" onChange={this.handleChange} />
-      		<button type="submit">register</button>
-      	</form>
+  		<div>
+      		<input type="text" name="email" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} />
+      		<input type="password" name="password" id="password" placholder="password" onChange={this.handleChange} value={this.state.password} />
+          <Button onClick={this.handleRegister} title="Register" loading={this.props.isLoading} />
+      	</div>
   	)
   }
 }
 
-export default Register
+export default connect(reduxState, reduxDispatch)(Register)
