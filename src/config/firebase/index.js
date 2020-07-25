@@ -1,7 +1,11 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
-var firebaseConfig = {
+// Initial Firebase Config from your Firebase Project
+// Set the configuration for your app
+// TODO: Replace with your project's config object
+const firebaseConfig = {
     apiKey: "AIzaSyCxnLup86SBLOzV1Ijc5G3Lt95TCVfxEtM",
     authDomain: "wpa-react.firebaseapp.com",
     databaseURL: "https://wpa-react.firebaseio.com",
@@ -12,8 +16,9 @@ var firebaseConfig = {
 };
   
 // Initialize Firebase
-var nameDB = 'simple-inventoris';
-var firebaseEnv =  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-export default firebaseEnv;
-export {nameDB};
+// Get a reference to the database service
+export const database = firebase.database();
+
+export default firebase

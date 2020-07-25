@@ -41,8 +41,9 @@ handleLogin = async (event) => {
     // Await (Wait proccess from Promise)
     const res = await this.props.loginApi({email, password}).catch(err => err)
 
+    console.log("response login success", res)
+    
     if (res) { 
-      console.log("response login success", res)
       this.setState({email:'', password:''})
       history.push("/")
     } else {
