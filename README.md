@@ -4,7 +4,7 @@ PWA (Progressive Web Application) of Admin Panel (CRUD) to manage inventory (pro
 
 ## Requirements
 - [Node](https://github.com/nodejs/node), [NPM](https://github.com/npm/cli), [yarn](https://github.com/yarnpkg/yarn)
-- _Firebase_ Account in Google to cloud database
+- _Firebase_ Account in Google to manage the database cloud
 
 
 ## Let's Start
