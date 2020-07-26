@@ -19,6 +19,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the database service
-export const database = firebase.database();
+export const database = firebase.database()
+
+// database.onDisconnect().remove(function(err) {
+//   if (err) {
+//     console.error('could not establish onDisconnect event', err);
+//   }
+// });
 
 export default firebase

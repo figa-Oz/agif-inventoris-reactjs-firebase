@@ -10,6 +10,9 @@ import Dashboard from './content/Dashboard'
 import Login from './content/Login'
 import Register from './content/Register'
 
+import CatList from './content/Category/Read'
+import CatDetail from './content/Category/Detail'
+
 class App extends Component {
   render() {
     return (
@@ -18,6 +21,8 @@ class App extends Component {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/category" component={CatList} />
+          <Route exact path="/category/:catId" component={CatDetail} />
         </Router>
       </Provider>
     );

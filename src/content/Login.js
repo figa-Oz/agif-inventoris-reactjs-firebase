@@ -3,19 +3,6 @@ import Button from '../component/Button'
 import { loginUserApi } from '../config/redux/action'
 import { connect } from 'react-redux'
 
-// import {
-//   BrowserRouter as Router,
-//   Route
-// } from "react-router-dom"
-
-const reduxState = (state) => ({
-  isLoading: state.isLoading
-})
-
-const reduxDispatch = (dispatch) => ({
-  loginApi: (data) => dispatch(loginUserApi(data))
-})
-
 class Login extends React.Component {
 constructor(props){
   super(props)
@@ -40,10 +27,11 @@ handleLogin = async (event) => {
 
     // Await (Wait proccess from Promise)
     const res = await this.props.loginApi({email, password}).catch(err => err)
-
-    console.log("response login success", res)
     
-    if (res) { 
+    if (res) {
+      console.log("response login: ", res)
+      localStorage.setItem('userData', JSON.stringify(res))
+
       this.setState({email:'', password:''})
       history.push("/")
     } else {
@@ -62,5 +50,13 @@ handleLogin = async (event) => {
     )
   }
 }
+
+const reduxState = (state) => ({
+  isLoading: state.isLoading
+})
+
+const reduxDispatch = (dispatch) => ({
+  loginApi: (data) => dispatch(loginUserApi(data))
+})
 
 export default connect(reduxState, reduxDispatch)(Login)

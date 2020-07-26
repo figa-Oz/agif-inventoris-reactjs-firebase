@@ -54,5 +54,81 @@ export const loginUserApi = (data) => (dispatch) => {
 	  		reject(false) // pass failed (invalid) to Login Content
 		})
 	})
+}
 
+export const saveCategoryApi = (data) => (dispatch) => {
+	return firebase.database().ref('category').push({
+	    title: data.title,
+	    desc : data.desc,
+	    date : data.date
+	});
+}
+
+export const listCategoryApi = () => (dispatch) => {
+
+	const catList = firebase.database().ref('category');
+	
+	return new Promise((resolve, reject) => {
+		catList.orderByChild("date").on('value', function(snapshot) {
+
+			const value = snapshot.val()
+
+			console.log("get data action redux: ", value)
+
+			const data = [] //new array initialization
+
+			// Change Object to Array
+			Object.keys(value).map(key => {
+				// push to modify new array schema
+				data.push({
+					id: key,
+					data: value[key]
+				})
+			})
+
+			dispatch({type: "SET_CATEGORY", value: data})
+			resolve(value)	
+		});
+	})
+}
+
+export const showCategoryApi = (catId) => (dispatch) => {
+
+	const catShow = firebase.database().ref('category/' + catId)
+
+	return new Promise((resolve, reject) => {
+		catShow.on('value', function(snapshot) 	{
+
+			const data = snapshot.val()
+
+			console.log("detail from action redux: ", data)
+
+			dispatch({type: "SET_CATEGORY", value: data})
+			resolve(data)	
+		});
+	})
+}
+
+export const updateCategoryApi = (catId, data) => (dispatch) => {
+	// Get a key for a new Post.
+  	const catPut = firebase.database().ref().child('category/' + catId)
+
+  	return new Promise((resolve, reject) => {
+	  	catPut.set(data, function(error) {
+		    if (error) {
+		    	reject(false)
+		    } else {
+		    	resolve(true)
+		    }
+		})
+	})
+}
+
+export const removeCategoryApi = (catId) => (dispatch) => {
+	// Get a key for a new Post.
+  	const catRemove = firebase.database().ref().child('category/' + catId)
+
+  	return new Promise((resolve, reject) => {
+	  	catRemove.remove()
+	})
 }
