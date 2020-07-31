@@ -2,6 +2,8 @@ import React from 'react'
 import Button from '../component/Button'
 import { registerUserApi } from '../config/redux/action'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 const reduxState = (state) => ({
   isLoading: state.isLoading
@@ -42,11 +44,39 @@ handleRegister = async (event) => {
 
   render() {
   	return(
-  		<div>
-      		<input type="text" name="email" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} />
-      		<input type="password" name="password" id="password" placholder="password" onChange={this.handleChange} value={this.state.password} />
-          <Button onClick={this.handleRegister} title="Register" loading={this.props.isLoading} />
-      	</div>
+  		<form onSubmit={this.handleRegister}>
+        
+        <div class="form-group">
+          <label for="email">Email address</label>
+      		<input 
+            type="text" 
+            name="email" 
+            placeholder="email"
+            className="form-control" 
+            onChange={this.handleChange} 
+            value={this.state.email} 
+          />
+        </div>
+        
+        <div class="form-group">
+      		<input 
+            type="password" 
+            name="password" 
+            placholder="password"
+            className="form-control" 
+            onChange={this.handleChange} 
+            value={this.state.password} 
+          />
+        </div>
+        
+        <Button 
+          type="submit" 
+          title="Register"
+          className="btn btn-primary" 
+          loading={this.props.isLoading} 
+        />
+      
+      </form>
   	)
   }
 }

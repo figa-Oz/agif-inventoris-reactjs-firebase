@@ -3,6 +3,8 @@ import { showCategoryApi, updateCategoryApi } from '../../config/redux/action'
 import { connect } from 'react-redux'
 import { dateTime } from '../../utils'
 // import CategoryEdit from './Update'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class Detail extends Component {
 	componentDidMount() {

@@ -2,6 +2,8 @@ import React from 'react'
 import Button from '../component/Button'
 import { loginUserApi } from '../config/redux/action'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class Login extends React.Component {
 constructor(props){
@@ -30,7 +32,9 @@ handleLogin = async (event) => {
     
     if (res) {
       console.log("response login: ", res)
-      localStorage.setItem('userData', JSON.stringify(res))
+      // localStorage.setItem('userData', JSON.stringify(res))
+
+      sessionStorage.setItem('userData', JSON.stringify(res))
 
       this.setState({email:'', password:''})
       history.push("/")
@@ -42,11 +46,38 @@ handleLogin = async (event) => {
 
   render() {
     return(
-      <div>
-          <input type="text" name="email" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} />
-          <input type="password" name="password" id="password" placholder="password" onChange={this.handleChange} value={this.state.password} />
-          <Button onClick={this.handleLogin} title="Login" loading={this.props.isLoading} />
+      <form onSubmit={this.handleLogin}>
+          
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input 
+            type="text" 
+            name="email" 
+            placeholder="email"
+            className="form-control" 
+            onChange={this.handleChange} 
+            value={this.state.email} 
+         />
         </div>
+        
+        <div class="form-group">
+          <input 
+            type="password" 
+            name="password" 
+            placholder="password"
+            className="form-control" 
+            onChange={this.handleChange} 
+            value={this.state.password} 
+          />
+        </div>
+        
+        <Button 
+          type="submit" 
+          title="Login"
+          className="btn btn-primary" 
+          loading={this.props.isLoading} 
+        />
+       </form>
     )
   }
 }

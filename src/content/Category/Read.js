@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { listCategoryApi } from '../../config/redux/action'
 import List from '../../component/List'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class Read extends Component {
 
@@ -11,8 +13,6 @@ class Read extends Component {
 	}
 
 	render() {
-
-		console.log("category list: ", this.props.category)
 
 		return (
 			<div>

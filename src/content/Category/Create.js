@@ -2,6 +2,8 @@ import React from 'react';
 import Input from '../../component/Input'
 import { connect } from 'react-redux'
 import { saveCategoryApi } from '../../config/redux/action'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class Create extends React.Component {
 	state = {
